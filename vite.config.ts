@@ -35,9 +35,22 @@ window.addEventListener('message', async (message) => {
       : null,
     // End of code for taking screenshots on chef.convex.dev.
   ].filter(Boolean),
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     Render needs Vite preview to listen on all interfaces (0.0.0.0)
+     and accept its custom Host header (<app>.onrender.com).        */
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,               // arbitrary; Render rewrites to $PORT
+    allowedHosts: [
+      ".onrender.com"         // wildcard for any Render sub-domain
+      // or use the exact host string: "gamified-job-portal-1vjv.onrender.com"
+    ],
   },
 }));
